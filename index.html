@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Charm Parfume — авторские ароматы по мотивам мировых шедевров. Индивидуальный подбор от эксперта-аромастилиста.">
+  <title>Charm Parfume — Найдите аромат, который расскажет вашу историю</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Применяем сохранённую тему до отрисовки страницы, чтобы избежать «мигания» -->
+  <script>
+    (function () {
+      var savedTheme = localStorage.getItem('charm-theme');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
+  <style>
+    :root {
+      /* Базовая палитра бренда (не меняется между темами) */
+      --color-white: #FFFFFF;
+      --color-cream: #FAF8F5;
+      --color-cream-dark: #F0EBE3;
+      --color-gold: #C9A962;
+      --color-gold-light: #D4BC82;
+      --color-gold-dark: #B8956A;
+      --color-black: #1A1A1A;
+      --color-gray-dark: #2C2C2C;
+      --color-gray: #6B6B6B;
+      --color-gray-light: #9A9A9A;
+      --color-beige: #E8E0D5;
+      --color-beige-dark: #D4C5B0;
+
+      /* Семантические токены — светлая тема (по умолчанию) */
+      --theme-bg: var(--color-cream);
+      --theme-bg-surface: var(--color-white);
+      --theme-bg-muted: var(--color-cream-dark);
+      --theme-bg-card: var(--color-cream);
+      --theme-text: var(--color-gray-dark);
+      --theme-text-heading: var(--color-black);
+      --theme-text-muted: var(--color-gray);
+      --theme-text-subtle: var(--color-gray-light);
+      --theme-border: rgba(26, 26, 26, 0.08);
+      --theme-header-bg: rgba(250, 248, 245, 0.95);
+      --theme-shadow: rgba(26, 26, 26, 0.06);
+      --theme-shadow-strong: rgba(26, 26, 26, 0.08);
+      --theme-beige: var(--color-beige);
+      --theme-beige-dark: var(--color-beige-dark);
+      --theme-btn-text: var(--color-black);
+      --theme-btn-border: var(--color-black);
+      --theme-btn-filled-bg: var(--color-black);
+      --theme-btn-filled-text: var(--color-white);
+      --theme-hero-glow: rgba(201, 169, 98, 0.12);
+      --theme-bottle-top: rgba(255, 255, 255, 0.9);
+      --theme-bottle-bottom: rgba(201, 169, 98, 0.3);
+      --theme-bottle-shadow: rgba(26, 26, 26, 0.15);
+      --theme-form-border: var(--color-beige-dark);
+      --theme-nav-hover: var(--color-black);
+      --theme-toggle-bg: var(--color-white);
+      --theme-toggle-shadow: rgba(26, 26, 26, 0.12);
+
+      --color-border: var(--theme-border);
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 32px;
+      --space-lg: 64px;
+      --space-xl: 96px;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Inter', system-ui, sans-serif;
+    }
+
+    /* Тёмная тема — переопределяем только семантические токены */
+    [data-theme="dark"] {
+      --theme-bg: #121212;
+      --theme-bg-surface: #1A1A1A;
+      --theme-bg-muted: #222222;
+      --theme-bg-card: #252525;
+      --theme-text: #D4D4D4;
+      --theme-text-heading: #F5F5F5;
+      --theme-text-muted: #A8A8A8;
+      --theme-text-subtle: #787878;
+      --theme-border: rgba(255, 255, 255, 0.08);
+      --theme-header-bg: rgba(18, 18, 18, 0.95);
+      --theme-shadow: rgba(0, 0, 0, 0.25);
+      --theme-shadow-strong: rgba(0, 0, 0, 0.4);
+      --theme-beige: #2E2A24;
+      --theme-beige-dark: #3A342C;
+      --theme-btn-text: #F5F5F5;
+      --theme-btn-border: #F5F5F5;
+      --theme-btn-filled-bg: #F5F5F5;
+      --theme-btn-filled-text: #1A1A1A;
+      --theme-hero-glow: rgba(201, 169, 98, 0.08);
+      --theme-bottle-top: rgba(255, 255, 255, 0.15);
+      --theme-bottle-bottom: rgba(201, 169, 98, 0.35);
+      --theme-bottle-shadow: rgba(0, 0, 0, 0.4);
+      --theme-form-border: #3A342C;
+      --theme-nav-hover: #F5F5F5;
+      --theme-toggle-bg: #2A2A2A;
+      --theme-toggle-shadow: rgba(0, 0, 0, 0.4);
+
+      --color-border: var(--theme-border);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--theme-text);
+      background: var(--theme-bg);
+      transition: background-color 0.35s ease, color 0.35s ease;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--theme-header-bg);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+      transition: background-color 0.35s ease, border-color 0.35s ease;
+    }
+
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+
+    .logo {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--theme-text-heading);
+    }
+
+    .logo span { color: var(--color-gold); }
+
+    .nav {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav a {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--theme-text-muted);
+      transition: color 0.3s;
+    }
+
+    .nav a:hover { color: var(--theme-nav-hover); }
+
+    .menu-toggle { display: none; background: none; border: none; cursor: pointer; }
+
+    /* Buttons */
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border: 1px solid var(--theme-btn-border);
+      background: transparent;
+      color: var(--theme-btn-text);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: var(--theme-btn-border);
+      color: var(--theme-btn-filled-text);
+    }
+
+    .btn--gold {
+      border-color: var(--color-gold);
+      color: var(--color-gold);
+    }
+
+    .btn--gold:hover {
+      background: var(--color-gold);
+      color: var(--color-white);
+    }
+
+    .btn--filled {
+      background: var(--theme-btn-filled-bg);
+      color: var(--theme-btn-filled-text);
+    }
+
+    .btn--filled:hover {
+      background: var(--color-gold);
+      border-color: var(--color-gold);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 72px;
+      background: var(--theme-bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 60%;
+      height: 140%;
+      background: radial-gradient(ellipse, var(--theme-hero-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero__label {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 24px;
+    }
+
+    .hero__title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--theme-text-heading);
+      margin-bottom: 24px;
+    }
+
+    .hero__subtitle {
+      font-size: 18px;
+      color: var(--theme-text-muted);
+      max-width: 480px;
+      margin-bottom: 40px;
+    }
+
+    .hero__actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero__visual {
+      position: relative;
+      aspect-ratio: 3/4;
+      background: var(--theme-bg-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero__visual-inner {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, var(--theme-beige) 0%, var(--theme-bg-muted) 50%, var(--theme-beige-dark) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+    }
+
+    .hero__bottle {
+      width: 80px;
+      height: 200px;
+      background: linear-gradient(180deg, var(--theme-bottle-top) 0%, var(--theme-bottle-bottom) 100%);
+      border-radius: 8px 8px 24px 24px;
+      position: relative;
+      box-shadow: 0 20px 60px var(--theme-bottle-shadow);
+    }
+
+    .hero__bottle::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      background: var(--color-gold);
+      border-radius: 4px 4px 0 0;
+    }
+
+    .hero__brand {
+      font-family: var(--font-serif);
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: var(--color-gold-dark);
+    }
+
+    /* Sections */
+    section { padding: var(--space-xl) 0; }
+
+    .section-label {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 4vw, 2.625rem);
+      font-weight: 400;
+      color: var(--theme-text-heading);
+      margin-bottom: 24px;
+    }
+
+    .section-text {
+      font-size: 17px;
+      color: var(--theme-text-muted);
+      max-width: 640px;
+    }
+
+    /* About */
+    .about { background: var(--theme-bg-surface); }
+
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about__photo {
+      aspect-ratio: 4/5;
+      background: var(--theme-beige);
+      position: relative;
+    }
+
+    .about__photo-inner {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--theme-beige) 0%, var(--theme-beige-dark) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about__photo-placeholder {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid var(--color-gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      font-size: 48px;
+      color: var(--color-gold);
+    }
+
+    .about__stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 40px;
+    }
+
+    .stat__number {
+      font-family: var(--font-serif);
+      font-size: 3rem;
+      color: var(--color-gold);
+      line-height: 1;
+    }
+
+    .stat__label {
+      font-size: 13px;
+      color: var(--theme-text-subtle);
+      margin-top: 8px;
+    }
+
+    /* Benefits */
+    .benefits__grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 64px;
+    }
+
+    .benefit {
+      padding: 32px 24px;
+      background: var(--theme-bg-surface);
+      border: 1px solid var(--color-border);
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.35s ease;
+    }
+
+    .benefit:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px var(--theme-shadow);
+    }
+
+    .benefit__icon {
+      font-size: 20px;
+      color: var(--color-gold);
+      margin-bottom: 20px;
+    }
+
+    .benefit__title {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      color: var(--theme-text-heading);
+      margin-bottom: 12px;
+    }
+
+    .benefit__text {
+      font-size: 14px;
+      color: var(--theme-text-muted);
+      line-height: 1.6;
+    }
+
+    /* Categories */
+    .categories {
+      background: var(--theme-bg);
+    }
+
+    .categories__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+    }
+
+    .category-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 520px;
+      overflow: hidden;
+      border: 1px solid var(--color-border);
+      background: var(--theme-bg-surface);
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.35s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 64px var(--theme-shadow-strong);
+      border-color: rgba(201, 169, 98, 0.35);
+    }
+
+    .category-card__visual {
+      position: relative;
+      flex: 1;
+      min-height: 280px;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    /* Временные фоны-заглушки — замените на url('images/categories/…') */
+    .category-card[data-category="classic"] .category-card__visual {
+      background-image:
+        linear-gradient(180deg, rgba(26, 26, 26, 0.15) 0%, rgba(26, 26, 26, 0.55) 100%),
+        linear-gradient(145deg, #E8E0D5 0%, #C9A962 45%, #F0EBE3 100%);
+    }
+
+    .category-card[data-category="selective"] .category-card__visual {
+      background-image:
+        linear-gradient(180deg, rgba(26, 26, 26, 0.2) 0%, rgba(26, 26, 26, 0.7) 100%),
+        linear-gradient(160deg, #2C2C2C 0%, #1A1A1A 50%, #3A342C 100%);
+    }
+
+    .category-card[data-category="premium"] .category-card__visual {
+      background-image:
+        linear-gradient(180deg, rgba(26, 26, 26, 0.1) 0%, rgba(26, 26, 26, 0.65) 100%),
+        linear-gradient(135deg, #1A1A1A 0%, #C9A962 35%, #121212 100%);
+    }
+
+    .category-card__visual::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26, 26, 26, 0.75) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    [data-theme="dark"] .category-card__visual::after {
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, transparent 60%);
+    }
+
+    .category-card__label {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      z-index: 1;
+    }
+
+    .category-card__content {
+      position: relative;
+      padding: 32px 28px 36px;
+      background: var(--theme-bg-surface);
+      border-top: 1px solid var(--color-border);
+      transition: background-color 0.35s ease;
+    }
+
+    .category-card__title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.75rem, 2.5vw, 2.25rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--theme-text-heading);
+      margin-bottom: 12px;
+    }
+
+    .category-card__desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--theme-text-muted);
+      margin-bottom: 28px;
+      max-width: 32ch;
+    }
+
+    .category-card__btn {
+      pointer-events: none;
+      padding: 12px 24px;
+      font-size: 12px;
+    }
+
+    .category-card:hover .category-card__btn {
+      background: var(--color-gold);
+      color: var(--color-white);
+      border-color: var(--color-gold);
+    }
+
+    /* Catalog */
+    .catalog { background: var(--theme-bg-surface); }
+
+    .catalog__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 64px;
+    }
+
+    .product-card {
+      background: var(--theme-bg-card);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s, background-color 0.35s ease;
+    }
+
+    .product-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 16px 48px var(--theme-shadow-strong);
+    }
+
+    .product-card__image {
+      aspect-ratio: 3/4;
+      background: linear-gradient(180deg, var(--theme-beige) 0%, var(--theme-bg-muted) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .product-card__bottle {
+      width: 50px;
+      height: 130px;
+      background: linear-gradient(180deg, var(--theme-bottle-top) 0%, var(--theme-bottle-bottom) 100%);
+      border-radius: 6px 6px 16px 16px;
+      box-shadow: 0 8px 24px var(--theme-bottle-shadow);
+    }
+
+    .product-card__body { padding: 24px; }
+
+    .product-card__name {
+      font-family: var(--font-serif);
+      font-size: 1.375rem;
+      color: var(--theme-text-heading);
+      margin-bottom: 4px;
+    }
+
+    .product-card__motive {
+      font-size: 12px;
+      color: var(--color-gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .product-card__notes {
+      font-size: 13px;
+      color: var(--theme-text-subtle);
+      margin-bottom: 16px;
+    }
+
+    .product-card__mood {
+      font-size: 14px;
+      color: var(--theme-text-muted);
+      margin-bottom: 16px;
+    }
+
+    .product-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .product-card__price {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--theme-text-heading);
+    }
+
+    .product-card__link {
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      border-bottom: 1px solid var(--color-gold);
+      padding-bottom: 2px;
+      transition: color 0.3s;
+    }
+
+    .product-card__link:hover { color: var(--color-gold-dark); }
+
+    .product-card--hidden { display: none; }
+
+    .catalog__filter {
+      display: none;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+      padding: 16px 20px;
+      background: var(--theme-bg-muted);
+      border: 1px solid var(--color-border);
+    }
+
+    .catalog__filter.is-visible { display: flex; }
+
+    .catalog__filter-label {
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--theme-text-muted);
+    }
+
+    .catalog__filter-name {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      color: var(--color-gold);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .catalog__filter-reset {
+      margin-left: auto;
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--theme-text-subtle);
+      background: none;
+      border: none;
+      border-bottom: 1px solid transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    .catalog__filter-reset:hover {
+      color: var(--theme-text-heading);
+      border-bottom-color: var(--theme-text-heading);
+    }
+
+    .catalog__empty {
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 24px;
+      color: var(--theme-text-muted);
+      font-size: 15px;
+    }
+
+    .catalog__empty.is-visible { display: block; }
+
+    /* Quiz CTA */
+    .quiz-cta {
+      background: var(--color-black);
+      color: var(--color-white);
+      text-align: center;
+    }
+
+    .quiz-cta .section-title { color: var(--color-white); }
+    .quiz-cta .section-text { color: rgba(255,255,255,0.7); margin: 0 auto 40px; }
+
+    /* Reviews */
+    .reviews__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 64px;
+    }
+
+    .review {
+      padding: 32px;
+      background: var(--theme-bg-surface);
+      border: 1px solid var(--color-border);
+      transition: background-color 0.35s ease;
+    }
+
+    .review__text {
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      font-style: italic;
+      color: var(--theme-text);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .review__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .review__avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--theme-beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-serif);
+      color: var(--color-gold);
+    }
+
+    .review__name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--theme-text-heading);
+    }
+
+    .review__meta {
+      font-size: 13px;
+      color: var(--theme-text-subtle);
+    }
+
+    /* FAQ */
+    .faq { background: var(--theme-bg-surface); }
+
+    .faq__list {
+      max-width: 720px;
+      margin: 64px auto 0;
+    }
+
+    .faq__item {
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .faq__question {
+      width: 100%;
+      padding: 24px 0;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: var(--font-serif);
+      font-size: 1.125rem;
+      color: var(--theme-text-heading);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .faq__question::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: var(--color-gold);
+      transition: transform 0.3s;
+      flex-shrink: 0;
+    }
+
+    .faq__item.open .faq__question::after { transform: rotate(45deg); }
+
+    .faq__answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s;
+      font-size: 15px;
+      color: var(--theme-text-muted);
+      line-height: 1.7;
+    }
+
+    .faq__item.open .faq__answer {
+      max-height: 200px;
+      padding-bottom: 24px;
+    }
+
+    /* Contact */
+    .contact__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 64px;
+    }
+
+    .form-group { margin-bottom: 32px; }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--theme-text-subtle);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 0;
+      border: none;
+      border-bottom: 1px solid var(--theme-form-border);
+      background: transparent;
+      font-family: var(--font-sans);
+      font-size: 16px;
+      color: var(--theme-text-heading);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--color-gold); }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .contact__info h3 {
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      color: var(--theme-text-heading);
+      margin-bottom: 24px;
+    }
+
+    .contact__channels {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .contact__channels a {
+      font-size: 15px;
+      color: var(--theme-text-muted);
+      transition: color 0.3s;
+    }
+
+    .contact__channels a:hover { color: var(--color-gold); }
+
+    /* Footer */
+    .footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+    }
+
+    .footer__logo {
+      font-family: var(--font-serif);
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      color: var(--theme-text-heading);
+      margin-bottom: 16px;
+    }
+
+    .footer__copy {
+      font-size: 13px;
+      color: var(--theme-text-subtle);
+    }
+
+    /* Кнопка переключения темы — фиксирована в правом нижнем углу */
+    .theme-toggle {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      z-index: 200;
+      width: 52px;
+      height: 52px;
+      border: 1px solid var(--color-border);
+      border-radius: 50%;
+      background: var(--theme-toggle-bg);
+      color: var(--color-gold);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px var(--theme-toggle-shadow);
+      transition: background-color 0.35s ease, border-color 0.35s ease,
+                  box-shadow 0.35s ease, transform 0.25s ease, color 0.3s ease;
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.08);
+      color: var(--color-gold-light);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--color-gold);
+      outline-offset: 3px;
+    }
+
+    /* Иконки солнца и луны — показываем нужную в зависимости от темы */
+    .theme-toggle__icon {
+      width: 22px;
+      height: 22px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* В светлой теме видна иконка луны (переключить на тёмную) */
+    .theme-toggle__icon--moon { display: block; }
+    .theme-toggle__icon--sun  { display: none; }
+
+    /* В тёмной теме — иконка солнца (вернуть светлую) */
+    [data-theme="dark"] .theme-toggle__icon--moon { display: none; }
+    [data-theme="dark"] .theme-toggle__icon--sun  { display: block; }
+
+    /* Animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .benefits__grid { grid-template-columns: repeat(2, 1fr); }
+      .catalog__grid { grid-template-columns: repeat(2, 1fr); }
+      .reviews__grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .nav { display: none; }
+      .menu-toggle { display: block; }
+      .hero__grid { grid-template-columns: 1fr; gap: 48px; }
+      .hero__visual { max-height: 400px; }
+      .about__grid { grid-template-columns: 1fr; gap: 48px; }
+      .benefits__grid { grid-template-columns: 1fr; }
+      .categories__grid { grid-template-columns: 1fr; gap: 32px; }
+      .category-card { min-height: auto; }
+      .category-card__visual { min-height: 220px; }
+      .catalog__grid { grid-template-columns: 1fr; }
+      .reviews__grid { grid-template-columns: 1fr; }
+      .contact__grid { grid-template-columns: 1fr; gap: 48px; }
+      section { padding: 64px 0; }
+    }
+  </style>
+  <link rel="stylesheet" href="css/extras.css">
+</head>
+<body>
+
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#" class="logo">Charm <span>Parfume</span></a>
+      <nav aria-label="Основная навигация">
+        <ul class="nav">
+          <li><a href="#about">Об эксперте</a></li>
+          <li><a href="#catalog">Каталог</a></li>
+          <li><a href="#quiz">Подбор</a></li>
+          <li><a href="#reviews">Отзывы</a></li>
+          <li><a href="#contact">Контакты</a></li>
+        </ul>
+      </nav>
+      <div class="header__actions">
+        <a href="#contact" class="btn btn--gold header__cta">Консультация</a>
+        <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="mobile-nav">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="mobile-nav" id="mobile-nav" aria-label="Мобильная навигация">
+    <ul class="mobile-nav__list">
+      <li><a href="#about">Об эксперте</a></li>
+      <li><a href="#catalog">Каталог</a></li>
+      <li><a href="#quiz">Подбор</a></li>
+      <li><a href="#reviews">Отзывы</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="fade-in">
+        <p class="hero__label">Аромастилист · 8 лет опыта</p>
+        <h1 class="hero__title">Найдите аромат, который расскажет вашу историю</h1>
+        <p class="hero__subtitle">Авторские композиции по мотивам мировых шедевров. Французское качество и индивидуальный подбор от эксперта.</p>
+        <div class="hero__actions">
+          <a href="#quiz" class="btn btn--filled">Подобрать аромат</a>
+          <a href="#catalog" class="btn">Смотреть каталог</a>
+        </div>
+      </div>
+      <div class="hero__visual fade-in">
+        <div class="hero__visual-inner">
+          <div class="hero__bottle"></div>
+          <span class="hero__brand">CHARM PARFUME</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="container about__grid">
+      <div class="about__photo fade-in">
+        <div class="about__photo-inner">
+          <div class="about__photo-placeholder">C</div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <p class="section-label">Об эксперте</p>
+        <h2 class="section-title">Ваш аромастилист</h2>
+        <p class="section-text">Более 8 лет я создаю ароматы, которые помогают людям выразить себя. Каждая композиция Charm Parfume — это сочетание французского качества и индивидуального подхода. Я не просто продаю духи — я помогаю найти запах, который станет частью вашего образа.</p>
+        <div class="about__stats">
+          <div>
+            <div class="stat__number">8+</div>
+            <div class="stat__label">лет опыта</div>
+          </div>
+          <div>
+            <div class="stat__number">500+</div>
+            <div class="stat__label">довольных клиентов</div>
+          </div>
+          <div>
+            <div class="stat__number">40+</div>
+            <div class="stat__label">авторских ароматов</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="benefits">
+    <div class="container">
+      <p class="section-label fade-in">Почему Charm Parfume</p>
+      <h2 class="section-title fade-in">Доступная роскошь с экспертным подходом</h2>
+      <div class="benefits__grid">
+        <div class="benefit fade-in">
+          <div class="benefit__icon">✦</div>
+          <h3 class="benefit__title">Французское качество</h3>
+          <p class="benefit__text">Компоненты и технологии мирового уровня</p>
+        </div>
+        <div class="benefit fade-in">
+          <div class="benefit__icon">✦</div>
+          <h3 class="benefit__title">Индивидуальный подбор</h3>
+          <p class="benefit__text">Консультация и рекомендации от эксперта</p>
+        </div>
+        <div class="benefit fade-in">
+          <div class="benefit__icon">✦</div>
+          <h3 class="benefit__title">Доступная роскошь</h3>
+          <p class="benefit__text">Премиальный аромат без переплаты за бренд</p>
+        </div>
+        <div class="benefit fade-in">
+          <div class="benefit__icon">✦</div>
+          <h3 class="benefit__title">Авторские мотивы</h3>
+          <p class="benefit__text">Композиции по мотивам известных ароматов</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="categories" id="categories">
+    <div class="container">
+      <p class="section-label fade-in">Линейки</p>
+      <h2 class="section-title fade-in">Три направления Charm Parfume</h2>
+      <div class="categories__grid">
+        <a href="#catalog" class="category-card fade-in" data-category="classic" aria-label="Классика — смотреть ароматы">
+          <div class="category-card__visual">
+            <!-- Замените фон на: background-image в .category-card[data-category="classic"] .category-card__visual -->
+            <span class="category-card__label">01 · Линейка</span>
+          </div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Классика</h3>
+            <p class="category-card__desc">Вечные композиции по мотивам культовых ароматов. Утончённость, узнаваемость и безупречная элегантность.</p>
+            <span class="btn btn--gold category-card__btn">Смотреть ароматы</span>
+          </div>
+        </a>
+        <a href="#catalog" class="category-card fade-in" data-category="selective" aria-label="Селектив — смотреть ароматы">
+          <div class="category-card__visual">
+            <!-- Замените фон на: background-image в .category-card[data-category="selective"] .category-card__visual -->
+            <span class="category-card__label">02 · Линейка</span>
+          </div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Селектив</h3>
+            <p class="category-card__desc">Нишевые авторские интерпретации с характером. Смелые аккорды для тех, кто выбирает индивидуальность.</p>
+            <span class="btn btn--gold category-card__btn">Смотреть ароматы</span>
+          </div>
+        </a>
+        <a href="#catalog" class="category-card fade-in" data-category="premium" aria-label="Премиум — смотреть ароматы">
+          <div class="category-card__visual">
+            <!-- Замените фон на: background-image в .category-card[data-category="premium"] .category-card__visual -->
+            <span class="category-card__label">03 · Линейка</span>
+          </div>
+          <div class="category-card__content">
+            <h3 class="category-card__title">Премиум</h3>
+            <p class="category-card__desc">Эксклюзивные композиции высшей концентрации. Редкие ингредиенты и безупречное звучание на коже.</p>
+            <span class="btn btn--gold category-card__btn">Смотреть ароматы</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="catalog" id="catalog">
+    <div class="container">
+      <p class="section-label fade-in">Каталог</p>
+      <h2 class="section-title fade-in">Авторские композиции</h2>
+      <div class="catalog__filter fade-in" id="catalog-filter" aria-live="polite">
+        <span class="catalog__filter-label">Категория:</span>
+        <span class="catalog__filter-name" id="catalog-filter-name"></span>
+        <button type="button" class="catalog__filter-reset" id="catalog-filter-reset">Показать все</button>
+      </div>
+      <div class="catalog__grid" id="catalog-grid">
+        <article class="product-card fade-in" data-category="classic" data-product="charm-no-5">
+          <div class="product-card__image"><div class="product-card__bottle"></div></div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Charm No. 5</h3>
+            <p class="product-card__motive">По мотивам Chanel No. 5</p>
+            <p class="product-card__notes">Иланг-иланг · Роза · Sandalwood</p>
+            <p class="product-card__mood">Элегантность, уверенность</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">от 3 500 ₽</span>
+              <a href="#" class="product-card__link">Подробнее</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card fade-in" data-category="classic" data-product="bois-de-provence">
+          <div class="product-card__image"><div class="product-card__bottle"></div></div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Bois de Provence</h3>
+            <p class="product-card__motive">По мотивам Guerlain Shalimar</p>
+            <p class="product-card__notes">Bergamot · Ваниль · Ладан</p>
+            <p class="product-card__mood">Тепло, благородство</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">от 3 400 ₽</span>
+              <a href="#" class="product-card__link">Подробнее</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card fade-in" data-category="selective" data-product="velvet-noir">
+          <div class="product-card__image"><div class="product-card__bottle"></div></div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Velvet Noir</h3>
+            <p class="product-card__motive">По мотивам Tom Ford Black Orchid</p>
+            <p class="product-card__notes">Чёрная орхидея · Пачули · Ваниль</p>
+            <p class="product-card__mood">Загадочность, чувственность</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">от 3 800 ₽</span>
+              <a href="#" class="product-card__link">Подробнее</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card fade-in" data-category="selective" data-product="encre-nocturne">
+          <div class="product-card__image"><div class="product-card__bottle"></div></div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Encre Nocturne</h3>
+            <p class="product-card__motive">По мотивам Serge Lutens La Fille de Berlin</p>
+            <p class="product-card__notes">Роза · Пеппер · Пatchouli</p>
+            <p class="product-card__mood">Драма, интенсивность</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">от 4 100 ₽</span>
+              <a href="#" class="product-card__link">Подробнее</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card fade-in" data-category="premium" data-product="lumiere-d-ete">
+          <div class="product-card__image"><div class="product-card__bottle"></div></div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Lumière d'Été</h3>
+            <p class="product-card__motive">По мотивам Dior J'adore</p>
+            <p class="product-card__notes">Жасмин · Магнолия · Амбра</p>
+            <p class="product-card__mood">Светлость, женственность</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">от 3 200 ₽</span>
+              <a href="#" class="product-card__link">Подробнее</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card fade-in" data-category="premium" data-product="or-imperial">
+          <div class="product-card__image"><div class="product-card__bottle"></div></div>
+          <div class="product-card__body">
+            <h3 class="product-card__name">Or Impérial</h3>
+            <p class="product-card__motive">По мотивам Clive Christian No. 1</p>
+            <p class="product-card__notes">Шафран · Уд · Белый мускус</p>
+            <p class="product-card__mood">Роскошь, величие</p>
+            <div class="product-card__footer">
+              <span class="product-card__price">от 5 900 ₽</span>
+              <a href="#" class="product-card__link">Подробнее</a>
+            </div>
+          </div>
+        </article>
+        <p class="catalog__empty" id="catalog-empty">В этой категории пока нет ароматов.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="quiz-cta" id="quiz">
+    <div class="container fade-in">
+      <p class="section-label">Подбор аромата</p>
+      <h2 class="section-title">Готовы найти свой аромат?</h2>
+      <p class="section-text">Ответьте на 3 вопроса — мы подберём линейку, которая подойдёт именно вам.</p>
+
+      <div class="quiz">
+        <div class="quiz__progress"><div class="quiz__progress-bar" id="quiz-progress"></div></div>
+
+        <div class="quiz-step is-active" data-step="0">
+          <h3 class="quiz-step__title">Какой образ вы хотите создать?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-option" data-scores="classic:2,selective:0,premium:0">Классическая элегантность</button>
+            <button type="button" class="quiz-option" data-scores="classic:0,selective:2,premium:1">Смелая индивидуальность</button>
+            <button type="button" class="quiz-option" data-scores="classic:1,selective:0,premium:2">Роскошь и статус</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="1">
+          <h3 class="quiz-step__title">Когда вы чаще носите аромат?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-option" data-scores="classic:2,selective:0,premium:1">На работе и деловых встречах</button>
+            <button type="button" class="quiz-option" data-scores="classic:0,selective:2,premium:0">На вечерних выходах</button>
+            <button type="button" class="quiz-option" data-scores="classic:1,selective:1,premium:2">На особых мероприятиях</button>
+          </div>
+        </div>
+
+        <div class="quiz-step" data-step="2">
+          <h3 class="quiz-step__title">Какие ноты вам ближе?</h3>
+          <div class="quiz-options">
+            <button type="button" class="quiz-option" data-scores="classic:2,selective:0,premium:1">Цветочные и пудровые</button>
+            <button type="button" class="quiz-option" data-scores="classic:0,selective:2,premium:0">Древесные и пряные</button>
+            <button type="button" class="quiz-option" data-scores="classic:0,selective:1,premium:2">Восточные и амбровые</button>
+          </div>
+        </div>
+
+        <div class="quiz__nav">
+          <button type="button" class="btn" id="quiz-prev" disabled>Назад</button>
+          <button type="button" class="btn btn--gold" id="quiz-next">Далее</button>
+        </div>
+
+        <div class="quiz-result" id="quiz-result">
+          <p class="quiz-result__text" id="quiz-result-text"></p>
+          <div class="quiz-result__actions">
+            <button type="button" class="btn btn--gold" id="quiz-result-btn">Смотреть ароматы</button>
+            <button type="button" class="btn" id="quiz-result-product">Подробнее об аромате</button>
+            <button type="button" class="btn" id="quiz-restart">Пройти заново</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <p class="section-label fade-in">Отзывы</p>
+      <h2 class="section-title fade-in">Истории наших клиентов</h2>
+      <div class="reviews__grid">
+        <blockquote class="review fade-in">
+          <p class="review__text">«Долго не могла найти свой аромат. После консультации получила именно то, что искала — утончённый, стойкий, без навязчивости. Теперь это моя визитная карточка.»</p>
+          <footer class="review__author">
+            <div class="review__avatar">А</div>
+            <div>
+              <div class="review__name">Анна</div>
+              <div class="review__meta">34 года</div>
+            </div>
+          </footer>
+        </blockquote>
+        <blockquote class="review fade-in">
+          <p class="review__text">«Заказал аромат по мотивам Bleu de Chanel — качество на уровне оригинала, а цена приятно удивила. Стойкость отличная, получаю комплименты каждый день.»</p>
+          <footer class="review__author">
+            <div class="review__avatar">М</div>
+            <div>
+              <div class="review__name">Михаил</div>
+              <div class="review__meta">41 год</div>
+            </div>
+          </footer>
+        </blockquote>
+        <blockquote class="review fade-in">
+          <p class="review__text">«Профессиональный подход и внимание к деталям. Подобрали аромат для свадьбы — гости до сих пор спрашивают, что это за духи. Рекомендую!»</p>
+          <footer class="review__author">
+            <div class="review__avatar">Е</div>
+            <div>
+              <div class="review__name">Елена</div>
+              <div class="review__meta">28 лет</div>
+            </div>
+          </footer>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq">
+    <div class="container">
+      <p class="section-label fade-in">FAQ</p>
+      <h2 class="section-title fade-in" style="text-align:center">Частые вопросы</h2>
+      <div class="faq__list">
+        <div class="faq__item fade-in">
+          <button class="faq__question">Чем ваши ароматы отличаются от оригиналов?</button>
+          <div class="faq__answer">Мы создаём авторские композиции по мотивам известных ароматов, используя качественные компоненты. Это не копии, а интерпретации с собственным характером.</div>
+        </div>
+        <div class="faq__item fade-in">
+          <button class="faq__question">Как проходит подбор аромата?</button>
+          <div class="faq__answer">Консультация длится 30–40 минут. Мы обсуждаем ваш стиль, предпочтения и повод — после чего я подбираю 2–3 композиции для тестирования.</div>
+        </div>
+        <div class="faq__item fade-in">
+          <button class="faq__question">Сколько держится стойкость?</button>
+          <div class="faq__answer">Стойкость зависит от конкретной композиции — в среднем от 6 до 10 часов. Все ароматы содержат качественные фиксаторы французского производства.</div>
+        </div>
+        <div class="faq__item fade-in">
+          <button class="faq__question">Можно ли заказать пробник?</button>
+          <div class="faq__answer">Да, пробники объёмом 2 мл доступны для большинства ароматов. Это отличный способ познакомиться с композицией перед покупкой полного флакона.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container">
+      <p class="section-label fade-in">Контакты</p>
+      <h2 class="section-title fade-in">Свяжитесь с нами</h2>
+      <div class="contact__grid">
+        <form class="fade-in" id="contact-form" novalidate>
+          <div class="form-group">
+            <label for="name">Ваше имя</label>
+            <input type="text" id="name" name="name" placeholder="Как к вам обращаться" required>
+            <span class="form-error" aria-live="polite"></span>
+          </div>
+          <div class="form-group">
+            <label for="phone">Телефон</label>
+            <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+            <span class="form-error" aria-live="polite"></span>
+          </div>
+          <div class="form-group">
+            <label for="message">Сообщение</label>
+            <textarea id="message" name="message" placeholder="Расскажите, какой аромат ищете"></textarea>
+          </div>
+          <button type="submit" class="btn btn--filled">Отправить заявку</button>
+        </form>
+        <div class="contact__info fade-in">
+          <h3>Другие способы связи</h3>
+          <ul class="contact__channels">
+            <li><a href="#">Telegram: @charmparfume</a></li>
+            <li><a href="#">WhatsApp: +7 (900) 000-00-00</a></li>
+            <li><a href="mailto:hello@charmparfume.ru">hello@charmparfume.ru</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__logo">Charm Parfume</div>
+      <p class="footer__copy">© 2026 Charm Parfume. Все права защищены.</p>
+    </div>
+  </footer>
+
+  <!-- Модальное окно товара -->
+  <div class="modal-overlay" id="product-modal-overlay"></div>
+  <div class="product-modal" id="product-modal" role="dialog" aria-modal="true" aria-labelledby="product-modal-title">
+    <button class="product-modal__close" id="product-modal-close" type="button" aria-label="Закрыть">&times;</button>
+    <h2 class="product-modal__title" id="product-modal-title"></h2>
+    <p class="product-modal__motive" id="product-modal-motive"></p>
+    <p class="product-modal__meta"><strong>Ноты:</strong> <span id="product-modal-notes"></span></p>
+    <p class="product-modal__meta"><strong>Настроение:</strong> <span id="product-modal-mood"></span></p>
+    <p class="product-modal__desc" id="product-modal-desc"></p>
+    <ul class="product-modal__volumes" id="product-modal-volumes"></ul>
+    <div class="product-modal__actions">
+      <button type="button" class="btn btn--filled" id="product-modal-order">Заказать</button>
+    </div>
+  </div>
+
+  <!-- Toast-уведомления -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!--
+    Переключатель темы (светлая / тёмная)
+    Кнопка закреплена в правом нижнем углу экрана.
+    aria-label меняется скриптом для доступности.
+  -->
+  <button
+    class="theme-toggle"
+    id="theme-toggle"
+    type="button"
+    aria-label="Включить тёмную тему"
+    title="Переключить тему"
+  >
+    <!-- Иконка луны — показывается в светлой теме -->
+    <svg class="theme-toggle__icon theme-toggle__icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <!-- Иконка солнца — показывается в тёмной теме -->
+    <svg class="theme-toggle__icon theme-toggle__icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+  </button>
+
+  <script src="js/products.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
