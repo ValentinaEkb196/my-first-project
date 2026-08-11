@@ -1,17 +1,11 @@
 {
   "name": "charm-parfume-site",
   "version": "1.0.0",
-  "description": "Лендинг аромастилиста Charm Parfume — авторские композиции по мотивам мировых шедевров",
+  "description": "Лендинг аромастилиста Charm Parfume",
   "private": true,
   "scripts": {
     "start": "npx --yes serve . -l 3000",
     "dev": "npm run start"
   },
-  "keywords": [
-    "perfume",
-    "landing",
-    "charmparfume"
-  ],
-  "author": "Charm Parfume",
   "license": "MIT"
 }

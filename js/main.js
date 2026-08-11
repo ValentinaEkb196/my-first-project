@@ -1,7 +1,6 @@
 (function () {
   'use strict';
 
-  // ── Fade-in on scroll ──────────────────────────────────────────────
   const fadeObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -10,7 +9,6 @@
 
   document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
-  // ── Каталог: фильтрация по категориям ──────────────────────────────
   const catalogSection = document.getElementById('catalog');
   const catalogFilter = document.getElementById('catalog-filter');
   const catalogFilterName = document.getElementById('catalog-filter-name');
@@ -58,7 +56,6 @@
   window.addEventListener('hashchange', handleCatalogHash);
   handleCatalogHash();
 
-  // ── FAQ accordion ──────────────────────────────────────────────────
   document.querySelectorAll('.faq__question').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.parentElement;
@@ -68,7 +65,6 @@
     });
   });
 
-  // ── Переключение темы ──────────────────────────────────────────────
   const themeToggle = document.getElementById('theme-toggle');
   const root = document.documentElement;
 
@@ -91,7 +87,6 @@
   updateThemeLabel(root.getAttribute('data-theme') === 'dark');
   themeToggle.addEventListener('click', () => setTheme(root.getAttribute('data-theme') !== 'dark'));
 
-  // ── Мобильное меню ─────────────────────────────────────────────────
   const menuToggle = document.getElementById('menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
   const mobileNavLinks = mobileNav.querySelectorAll('a');
@@ -117,15 +112,6 @@
 
   mobileNavLinks.forEach(link => link.addEventListener('click', closeMobileNav));
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeMobileNav();
-      closeProductModal();
-      closeQuizResult();
-    }
-  });
-
-  // ── Toast-уведомления ──────────────────────────────────────────────
   const toast = document.getElementById('toast');
 
   function showToast(message, type) {
@@ -135,7 +121,6 @@
     showToast._timer = setTimeout(() => toast.classList.remove('is-visible'), 4000);
   }
 
-  // ── Форма обратной связи ───────────────────────────────────────────
   const contactForm = document.getElementById('contact-form');
   const nameInput = document.getElementById('name');
   const phoneInput = document.getElementById('phone');
@@ -188,7 +173,6 @@
     input.addEventListener('input', () => setFieldError(input, ''));
   });
 
-  // ── Модальное окно товара ──────────────────────────────────────────
   const productModal = document.getElementById('product-modal');
   const productModalOverlay = document.getElementById('product-modal-overlay');
   const productModalClose = document.getElementById('product-modal-close');
@@ -249,7 +233,6 @@
     nameInput.focus();
   });
 
-  // ── Квиз подбора аромата ───────────────────────────────────────────
   const quizSteps = document.querySelectorAll('.quiz-step');
   const quizProgress = document.getElementById('quiz-progress');
   const quizPrev = document.getElementById('quiz-prev');
@@ -321,7 +304,6 @@
       return;
     }
 
-    // Считаем результат
     Object.keys(quizAnswers).forEach(k => { quizAnswers[k] = 0; });
     quizSteps.forEach(step => {
       const sel = step.querySelector('.quiz-option.is-selected');
@@ -364,9 +346,16 @@
     updateQuizUI();
   });
 
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileNav();
+      closeProductModal();
+      closeQuizResult();
+    }
+  });
+
   updateQuizUI();
 
-  // ── Плавная прокрутка для якорных ссылок ───────────────────────────
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const id = anchor.getAttribute('href');

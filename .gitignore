@@ -1,22 +1,5 @@
-# Зависимости
 node_modules/
-
-# ОС
 .DS_Store
 Thumbs.db
-Desktop.ini
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-
-# Логи и кэш
-*.log
-npm-debug.log*
-.cache/
-
-# Переменные окружения
 .env
 .env.local

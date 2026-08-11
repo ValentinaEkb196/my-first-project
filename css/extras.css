@@ -5,7 +5,6 @@ body.modal-open {
   overflow: hidden;
 }
 
-/* Header extras */
 .header__actions {
   display: flex;
   align-items: center;
@@ -78,7 +77,6 @@ body.modal-open {
   color: var(--theme-text-heading);
 }
 
-/* Form errors */
 .form-error {
   display: block;
   font-size: 12px;
@@ -92,7 +90,6 @@ body.modal-open {
   border-bottom-color: #c0392b;
 }
 
-/* Toast */
 .toast {
   position: fixed;
   bottom: 90px;
@@ -122,7 +119,6 @@ body.modal-open {
   color: var(--color-white);
 }
 
-/* Product modal */
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -225,7 +221,6 @@ body.modal-open {
   flex-wrap: wrap;
 }
 
-/* Quiz */
 .quiz {
   max-width: 640px;
   margin: 0 auto;
